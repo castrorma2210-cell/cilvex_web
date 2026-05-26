@@ -3,7 +3,7 @@
    Soporte offline básico + instalación PWA confiable
    =================================== */
 
-const VERSION = 'v1';
+const VERSION = 'v2';
 const CACHE = `cilvex-${VERSION}`;
 
 /* App shell — solo URLs estables (sin assets con hash, sin videos pesados) */
