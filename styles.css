@@ -221,54 +221,6 @@ img, video { display: block; max-width: 100%; }
 }
 .navbar-cta:hover { border-color: var(--gold); color: var(--gold); }
 
-/* Navbar actions group */
-.navbar-actions {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-/* Download (APK) button — premium gold */
-.navbar-download {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  font-size: .8rem;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  padding: 10px 22px;
-  border-radius: 6px;
-  color: var(--black);
-  background: linear-gradient(135deg, #E4CF9E 0%, var(--gold) 52%, #A98C56 100%);
-  box-shadow: 0 4px 18px -6px rgba(198,169,114,.45);
-  overflow: hidden;
-  white-space: nowrap;
-  transition: transform .4s var(--ease), box-shadow .4s var(--ease);
-}
-.navbar-download svg {
-  flex-shrink: 0;
-  transition: transform .4s var(--ease);
-}
-.navbar-download::before {
-  content: '';
-  position: absolute;
-  top: 0; left: -130%;
-  width: 60%; height: 100%;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,.5), transparent);
-  transform: skewX(-20deg);
-  transition: left .7s var(--ease);
-  pointer-events: none;
-}
-.navbar-download:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 9px 28px -6px rgba(198,169,114,.65);
-}
-.navbar-download:hover svg { transform: translateY(2px); }
-.navbar-download:hover::before { left: 140%; }
-.navbar-download:active { transform: translateY(0); }
-
 /* Hamburger */
 .hamburger {
   display: none;
@@ -331,13 +283,16 @@ img, video { display: block; max-width: 100%; }
   align-items: center;
   gap: 11px;
   padding: 14px 40px;
+  border: none;
   border-radius: 6px;
   background: linear-gradient(135deg, #E4CF9E 0%, var(--gold) 52%, #A98C56 100%);
   color: var(--black);
+  font-family: inherit;
   font-size: .85rem;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
+  cursor: pointer;
   box-shadow: 0 6px 22px -8px rgba(198,169,114,.55);
   transition: transform .3s var(--ease), box-shadow .3s var(--ease);
 }
@@ -348,7 +303,7 @@ img, video { display: block; max-width: 100%; }
 }
 
 @media (max-width: 768px) {
-  .navbar-links, .navbar-actions { display: none; }
+  .navbar-links, .navbar-cta { display: none; }
   .hamburger { display: flex; }
 }
 

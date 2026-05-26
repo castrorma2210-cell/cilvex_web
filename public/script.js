@@ -135,4 +135,43 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'Enter') sendMessage();
   });
 
+  // ——— Instalación de la app (PWA) ———
+  let deferredPrompt = null;
+  const installBtn = document.getElementById('installApp');
+
+  // Si la app ya está instalada (abierta en modo standalone), ocultar el botón
+  const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+  if (isStandalone && installBtn) installBtn.style.display = 'none';
+
+  // Chrome/Android dispara este evento cuando la app es instalable
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+  });
+
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        // Instalación nativa (Android/Chrome): muestra el diálogo del sistema
+        deferredPrompt.prompt();
+        await deferredPrompt.userChoice;
+        deferredPrompt = null;
+      } else {
+        // Fallback para iOS (Safari) u otros navegadores sin instalación automática
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        if (isIOS) {
+          alert('Para instalar CILVEX en tu iPhone:\n\n1. Toca el botón Compartir (cuadro con flecha hacia arriba).\n2. Selecciona "Agregar a inicio".');
+        } else {
+          alert('Para instalar CILVEX:\n\nAbre el menú de tu navegador (⋮) y selecciona "Instalar app" o "Agregar a pantalla de inicio".');
+        }
+      }
+    });
+  }
+
+  // Ocultar el botón una vez instalada la app
+  window.addEventListener('appinstalled', () => {
+    deferredPrompt = null;
+    if (installBtn) installBtn.style.display = 'none';
+  });
+
 });
