@@ -174,4 +174,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (installBtn) installBtn.style.display = 'none';
   });
 
+  // ——— Registrar Service Worker (soporte offline + instalación confiable) ———
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js').catch(() => {});
+    });
+  }
+
 });
